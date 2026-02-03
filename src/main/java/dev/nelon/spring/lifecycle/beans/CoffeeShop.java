@@ -1,0 +1,55 @@
+package dev.nelon.spring.lifecycle.beans;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
+
+@Component
+public class CoffeeShop {
+// implements InitializingBean, DisposableBean
+	
+	private final ObjectProvider<Coffee> coffeeObjectProvider;
+	private final Map<String, Ingredient> ingredients;
+	
+	public CoffeeShop(ObjectProvider<Coffee> coffeeObjectProvider, Map<String, Ingredient> ingredient) {
+		this.coffeeObjectProvider = coffeeObjectProvider;
+		this.ingredients = ingredient;
+	}
+	
+	@PostConstruct
+	public void openShop() {
+		System.out.println("Shop is opened");
+	}
+	
+	public void makeCoffee() {
+		System.out.println("Making coffee");
+	}
+	
+	public void makeCoffee(String type) {
+		Coffee coffee = coffeeObjectProvider.getObject(type);
+		System.out.println("Making coffee: " + coffee);
+	}
+	
+	public void makeCoffee(String type, String ingredient) {
+		Coffee coffee = coffeeObjectProvider.getObject(type);
+		System.out.println("Making coffee with ingredient: " + ingredients.get(ingredient) + ". Coffee: " + coffee);
+	}
+	
+	@PreDestroy
+	public void closeShop() {
+		System.out.println("Shop is closing");
+	}
+
+//	@Override
+//	public void afterPropertiesSet() throws Exception {
+//		System.out.println("Shop is opened");
+//	}
+//
+//	@Override
+//	public void destroy() throws Exception {
+//		System.out.println("Shop is closing");
+//	}
+}
