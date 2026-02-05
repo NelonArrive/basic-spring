@@ -4,7 +4,7 @@ import dev.nelon.spring.lifecycle.beans.CoffeeShop;
 import dev.nelon.spring.lifecycle.config.LifecycleConfiguration;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class LifeCycleApplication {
+public class Main {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(LifecycleConfiguration.class);
 		
